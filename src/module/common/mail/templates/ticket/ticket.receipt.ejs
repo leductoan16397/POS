@@ -1,0 +1,263 @@
+<table role="presentation" style="width:100%;background-color:#efefef">
+    <tbody>
+        <tr>
+            <td>
+                <table role="presentation"
+                    style="hyphens:none;overflow-wrap:break-word;word-wrap:break-word;word-break:break-word;width:100%;margin:auto;max-width:600px;min-width:280px;text-align:center;margin-top: 24px;">
+                    <tbody>
+                        <tr>
+                            <td style="padding:0">
+                                <table
+                                    style="width: 100%; padding: 20px; background-color: #fff; border-top: 3px solid #093594;">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <%- include('./components/header') -%>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align: center;">
+                                                <p style="color:rgba(0,0,0,0.87);font-family:Roboto,Arial,Helvetica,sans-serif;font-weight:normal;font-size:34px;line-height:40px;text-align:center;margin:8px 0 0">
+                                                    <%= formattedTotalPrice %>
+                                                </p>
+                                                <p style="color:rgba(0,0,0,0.54);font-family:Roboto,Arial,Helvetica,sans-serif;font-weight:normal;font-size:14px;text-align:center;line-height:16px;margin:3px 0 0;word-break:break-word">
+                                                    Total
+                                                </p>
+                                                <p style="border-bottom:dashed 1px rgba(0,0,0,0.12);margin:13px 16px 0"></p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td height="7"></td>    
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <%if (employee) { %>
+                                                    <p style="color:rgba(0,0,0,0.87);font-family:Roboto,Arial,Helvetica,sans-serif;font-weight:normal;font-size:14px;text-align:left;margin:0;padding:4px 16px 0;line-height:16px;word-break:break-word">
+                                                        Employee: <%= employee.name %>
+                                                    </p>
+                                                <% } %>
+                                            </td>
+                                        </tr>
+                                        <%if (employee) { %>
+                                            <tr>
+                                                <td>
+                                                    <p style="border-bottom:dashed 1px rgba(0,0,0,0.12);margin:12px 16px 0"></p>
+                                                </td>
+                                            </tr>
+                                        <% } %>
+                                        <tr>
+                                            <td>
+                                                <p  style="color:rgba(0,0,0,0.87);font-family:Roboto,Arial,Helvetica,sans-serif;font-weight:bold;font-size:14px;text-align:left;padding:12px 16px 11px;margin:0;line-height:16px;word-break:break-word">
+                                                    <%= ticketType %>
+                                                </p>
+                                                <p style="border-bottom:dashed 1px rgba(0,0,0,0.12);margin:0 16px"></p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <table border="0" cellpadding="0" cellspacing="0" style="width:100%">
+                                                    <tbody>
+                                                        <% for(const itemTicket of itemTickets) { %>
+                                                            <tr>
+                                                                <td valign="top" style="max-width:75%;padding:11px 0 0 16px">
+                                                                    <p
+                                                                        style="color:rgba(0,0,0,0.87);font-family:Roboto,Arial,Helvetica,sans-serif;font-weight:normal;font-size:14px;text-align:left;margin:0;line-height:16px;word-break:break-word">
+                                                                        <%= itemTicket.itemName %>
+                                                                    </p>
+                                                                </td>
+                                                                <td valign="top" style="padding:11px 16px 0 0;width:1%;white-space:nowrap">
+                                                                    <p
+                                                                        style="color:rgba(0,0,0,0.87);font-family:Roboto,Arial,Helvetica,sans-serif;font-weight:normal;font-size:14px;text-align:right;margin:0;line-height:16px">
+                                                                        <%= itemTicket.formattedTotalPrice %>
+                                                                    </p>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td colspan="2" style="padding:0 16px">
+                                                                    <p style="color:rgba(0,0,0,0.54);font-family:Roboto,Arial,Helvetica,sans-serif;font-weight:normal;font-size:13px;text-align:left;margin:0;line-height:16px;padding-top:5px">
+                                                                        <%= itemTicket.quantity %> × <%= itemTicket.formattedPrice %>
+                                                                    </p>
+                                                                </td>
+                                                            </tr>
+                                                            <% if (itemTicket.modifiers.length) { %>
+                                                                <% for(const modifier of itemTicket.modifiers) { %>
+                                                                    <tr>
+                                                                        <td colspan="2" style="padding:0 16px">
+                                                                            <p
+                                                                                style="color:rgba(0,0,0,0.54);font-family:Roboto,Arial,Helvetica,sans-serif;font-weight:normal;font-size:13px;text-align:left;margin:0;line-height:16px;padding-top:5px">
+                                                                                <%= modifier %>
+                                                                            </p>
+                                                                        </td>
+                                                                    </tr>
+                                                                <% } %>
+                                                            <% } %>
+                                                        <% } %>
+                                                    </tbody>
+                                                </table>
+                                                <p style="border-bottom:dashed 1px rgba(0,0,0,0.12);margin:12px 16px 11px"></p>
+                                            </td>
+                                        </tr>
+                                        <% if (discounts.length) { %>
+                                            <tr>
+                                                <td>
+                                                    <table border="0" cellpadding="0" cellspacing="0" style="width:100%">
+                                                        <tbody>
+                                                            <% for(const discount of discounts) { %>
+                                                                <tr>
+                                                                    <td valign="top" style="max-width:75%;padding:0 0 0 16px;line-height:16px">
+                                                                        <p
+                                                                            style="color:rgba(0,0,0,0.87);font-family:Roboto,Arial,Helvetica,sans-serif;font-weight:normal;font-size:14px;text-align:left;margin:0;padding-bottom:4px;word-break:break-word">
+                                                                            <%= discount.name %>
+                                                                        </p>
+                                                                    </td>
+                                                                    <td valign="top" style="max-width:25%;padding:0 16px 0 0;line-height:16px">
+                                                                        <p
+                                                                            style="color:rgba(0,0,0,0.87);font-family:Roboto,Arial,Helvetica,sans-serif;font-weight:normal;font-size:14px;text-align:right;margin:0;direction:ltr;padding-bottom:4px">
+                                                                            -<%= discount.formattedPrice %>
+                                                                        </p>
+                                                                    </td>
+                                                                </tr>
+                                                                <% } %>
+                                                        </tbody>
+                                                    </table>
+                                                    <p style="border-bottom:dashed 1px rgba(0,0,0,0.12);margin:12px 16px 11px"></p>
+                                                </td>
+                                            </tr>
+                                        <% } %>
+
+                                        <tr>
+                                            <td>
+                                                <table border="0" cellpadding="0" cellspacing="0" style="width:100%">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td style="max-width:75%;padding:0 0 0 16px;line-height:16px" valign="top">
+                                                                <p style="color:rgba(0,0,0,0.87);font-family:Roboto,Arial,Helvetica,sans-serif;font-weight:600;font-size:14px;text-align:left;margin:0;padding-bottom:4px;word-break:break-word">
+                                                                    Total
+                                                                </p>
+                                                            </td>
+                                                            <td valign="top" style="max-width:25%;padding:0 16px 0 0;line-height:16px">
+                                                                <p style="color:rgba(0,0,0,0.87);font-family:Roboto,Arial,Helvetica,sans-serif;font-weight:600;font-size:14px;text-align:right;margin:0;padding-bottom:4px">
+                                                                    <%= formattedTotalPrice %>
+                                                                </p>
+                                                            </td>
+                                                        </tr>
+                                                        </tr>
+                                                        <% for(const tax of taxList) { %>
+                                                            <tr>
+                                                                <td valign="top" style="max-width:75%;padding:0 0 0 16px;line-height:16px">
+                                                                    <p
+                                                                        style="color:rgba(0,0,0,0.87);font-family:Roboto,Arial,Helvetica,sans-serif;font-weight:normal;font-size:14px;text-align:left;margin:0;padding-bottom:4px;word-break:break-word">
+                                                                        <%= tax.name %>
+                                                                    </p>
+                                                                </td>
+                                                                <td valign="top" style="max-width:25%;padding:0 16px 0 0;line-height:16px">
+                                                                    <p
+                                                                        style="color:rgba(0,0,0,0.87);font-family:Roboto,Arial,Helvetica,sans-serif;font-weight:normal;font-size:14px;text-align:right;margin:0;direction:ltr;padding-bottom:4px">
+                                                                        <%= tax.formattedPrice %>
+                                                                    </p>
+                                                                </td>
+                                                            </tr>
+                                                        <% } %>
+                                                    </tbody>
+                                                </table>
+                                                <p style="border-bottom:dashed 1px rgba(0,0,0,0.12);margin:12px 16px 11px"></p>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <table border="0" cellpadding="0" cellspacing="0" style="width:100%">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td colspan="2" height="12"></td>
+                                                        </tr>
+                                                        <% for(const receipt of receipts) { %>
+                                                            <% if (receipts.length > 1) { %>
+                                                                <tr>
+                                                                    <td valign="top" style="max-width:75%;padding:0 0 0 16px;line-height:16px">
+                                                                        <p
+                                                                            style="color:rgba(0,0,0,0.87);font-family:Roboto,Arial,Helvetica,sans-serif;font-weight:normal;font-size:14px;text-align:left;margin:0;padding-bottom:4px;word-break:break-word">
+                                                                            Amount Due
+                                                                        </p>
+                                                                    </td>
+                                                                    <td valign="top" style="max-width:25%;padding:0 16px 0 0;line-height:16px">
+                                                                        <p
+                                                                            style="color:rgba(0,0,0,0.87);font-family:Roboto,Arial,Helvetica,sans-serif;font-weight:normal;font-size:14px;text-align:right;margin:0;direction:ltr;padding-bottom:4px">
+                                                                            <%= receipt.formattedAmout %>
+                                                                        </p>
+                                                                    </td>
+                                                                </tr>
+                                                            <% } %>
+                                                            <tr>
+                                                                <td valign="top" style="max-width:75%;padding:0 0 0 16px;line-height:16px">
+                                                                    <p
+                                                                        style="color:rgba(0,0,0,0.87);font-family:Roboto,Arial,Helvetica,sans-serif;font-weight:normal;font-size:14px;text-align:left;margin:0;padding-bottom:4px;word-break:break-word">
+                                                                        <%= receipt.name %>
+                                                                    </p>
+                                                                </td>
+                                                                <td valign="top" style="max-width:25%;padding:0 16px 0 0;line-height:16px">
+                                                                    <p
+                                                                        style="color:rgba(0,0,0,0.87);font-family:Roboto,Arial,Helvetica,sans-serif;font-weight:normal;font-size:14px;text-align:right;margin:0;direction:ltr;padding-bottom:4px">
+                                                                        <%= receipt.formattedPrice %>
+                                                                    </p>
+                                                                </td>
+                                                            </tr>
+                                                            <% if (receipt.formattedChange !== '') { %>
+                                                                <tr>
+                                                                    <td valign="top" style="max-width:75%;padding:0 0 0 16px;line-height:16px">
+                                                                        <p
+                                                                            style="color:rgba(0,0,0,0.87);font-family:Roboto,Arial,Helvetica,sans-serif;font-weight:normal;font-size:14px;text-align:left;margin:0;padding-bottom:4px;word-break:break-word">
+                                                                            Change
+                                                                        </p>
+                                                                    </td>
+                                                                    <td valign="top" style="max-width:25%;padding:0 16px 0 0;line-height:16px">
+                                                                        <p
+                                                                            style="color:rgba(0,0,0,0.87);font-family:Roboto,Arial,Helvetica,sans-serif;font-weight:normal;font-size:14px;text-align:right;margin:0;direction:ltr;padding-bottom:4px">
+                                                                            <%= receipt.formattedChange %>
+                                                                        </p>
+                                                                    </td>
+                                                                </tr>
+                                                            <% } %>
+                                                            <tr>
+                                                                <td colspan="2" height="12"></td>
+                                                            </tr>
+                                                        <% } %>
+                                                    </tbody>
+                                                </table>
+                                                <p style="border-bottom:dashed 1px rgba(0,0,0,0.12);margin:8px 0 12px"></p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <table border="0" cellpadding="0" cellspacing="0" style="width:100%">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td valign="top" style="max-width:75%;padding:0 0 12px 16px;line-height:16px">
+                                                                <p
+                                                                    style="color:rgba(0,0,0,0.54);font-family:Roboto,Arial,Helvetica,sans-serif;font-weight:normal;font-size:14px;text-align:left;margin:0">
+                                                                    <%= ticketDate %>
+                                                                </p>
+                                                            </td>
+                                                            <td valign="top" style="max-width:75%;padding:0 16px 12px 0;line-height:16px">
+                                                                <p
+                                                                    style="color:rgba(0,0,0,0.54);font-family:Roboto,Arial,Helvetica,sans-serif;font-weight:normal;font-size:14px;text-align:right;margin:0;direction:ltr">
+                                                                    № <%= ticketLabel %>
+                                                                </p>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                                <%- include('../components/footer') -%>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+</table>
